@@ -216,4 +216,22 @@ public class SearchActivity extends AppCompatActivity implements AMap.OnMyLocati
                 }).show();
         return true;
     }
+    /**
+     * 双击退出
+     */
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+            long secondTime = System.currentTimeMillis();
+            if (secondTime - firstTime > 2000) {
+                Toast.makeText(SearchActivity.this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                firstTime = secondTime;
+                return true;
+            } else {
+                System.exit(0);
+            }
+            return super.onKeyUp(keyCode, event);
+        }
+        return true;
+    }
 }
